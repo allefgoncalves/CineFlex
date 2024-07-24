@@ -5,9 +5,13 @@ import SuccessPage from './components/SuccessPage.jsx';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled, { createGlobalStyle } from 'styled-components';
 import ClapperBoard from '../public/clapperboard.png';
+import { useState } from 'react';
 
 
 export default function App() {
+
+  const [data, setData] = useState([]);
+
   return (
     <BrowserRouter>
       <GlobalStyle />
@@ -15,8 +19,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Homepage />}></Route>
         <Route path={`/sessoes/:idFilme`} element={<SessionsPage />}></Route>
-        <Route path={`/assentos/:idSessao`} element={<SeatsPage />}></Route>
-        <Route path={`/sucesso`} element={<SuccessPage />}></Route>
+        <Route path={`/assentos/:idSessao`} element={<SeatsPage setData={setData}/>}></Route>
+        <Route path={`/sucesso`} element={<SuccessPage data={data}/>}></Route>
       </Routes>    
     </BrowserRouter>
   )

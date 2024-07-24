@@ -15,8 +15,6 @@ export default function Cadeiras(props){
                 </SeatItem>
             ):(
                 <SeatItem
-                backgroundColor='#2B2D36'
-                borderColor = '#2B2D36'
                 key={seat.id}
             >
                 {seat.name}
@@ -35,8 +33,9 @@ const SeatsContainer = styled.ul`
     justify-content: center;
 `
 const SeatItem = styled.li`
-    border: 2px solid ${props=>props.borderColor};  
-    background-color: ${props=>props.backgroundColor};
+    border: 2px solid;  
+    border-color: ${props => props.borderColor || '#2B2D36'};
+    background-color: ${props=>props.backgroundColor || '#2B2D36'};
     color: #2B2D36;
     height: 26px;
     width: 26px;

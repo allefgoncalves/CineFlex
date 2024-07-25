@@ -12,7 +12,13 @@ export default function InputDados({ selecionados, setData }){
         event.preventDefault();
 
         const requisicao = {
-            ids: selecionados,
+            ids: selecionados.map((e)=>e.id),
+            name: name,
+            cpf: cpf
+        };
+
+        const dataSuccess = {
+            ids: selecionados.map((e)=>e.name),
             name: name,
             cpf: cpf
         };
@@ -20,7 +26,7 @@ export default function InputDados({ selecionados, setData }){
         axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many",requisicao)
 
         .then((e) => {
-            setData(requisicao);
+            setData(dataSuccess);
             Navigate("/sucesso");
         })
         .catch(error => console.log(error));

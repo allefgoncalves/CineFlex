@@ -11,7 +11,6 @@ export default function HomePage(){
 
     promise.then(resposta => {
       setfilmes(resposta.data);
-      console.log(resposta.data);
     });
 
     promise.catch(() => {
@@ -30,7 +29,6 @@ export default function HomePage(){
               <img 
                 src={filme.posterURL} 
                 alt={filme.title}
-                onClick={()=>Navigate("/sessoes/:idFilme")}
               />
             </Link>
           </MovieContainer>

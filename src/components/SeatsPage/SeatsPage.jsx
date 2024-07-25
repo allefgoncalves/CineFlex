@@ -27,11 +27,11 @@ export default function SeatsPage({setData}){
 
     },[]);
 
-    function selecionar(id){        
-        if(selecionados.includes(id)){
-            setSelecionados(selecionados.filter(numero => numero !== id));
-        }else{
-            setSelecionados([...selecionados, id]);
+    function selecionar(id, name) {
+        if (selecionados.some(item => item.id === id)) {
+            setSelecionados(selecionados.filter(item => item.id !== id));
+        } else {
+            setSelecionados([...selecionados, {id, name}]);
         }
     }
 

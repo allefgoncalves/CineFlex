@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
-export default function Cadeiras(props){
+export default function Cadeiras({ seatslocal, selecionados, selecionar }){
     return(
         <SeatsContainer>
-            {props.seatslocal.map(seat=>(
+            {seatslocal.map(seat=>(
             seat.isAvailable?(
                 <SeatItem
-                    backgroundColor={props.selecionados.includes(seat.id)?'#9DB899':'#FADBC5'} 
-                    borderColor = {props.selecionados.includes(seat.id)?'#808F9D':'#EE897F'}
-                    key={seat.id}
-                    onClick={()=>props.selecionar(seat.id)}
+                backgroundColor={selecionados.some(item => item.id === seat.id) ? '#9DB899' : '#FADBC5'}
+                borderColor={selecionados.some(item => item.id === seat.id) ? '#808F9D' : '#EE897F'}
+                key={seat.id}
+                    onClick={()=>selecionar(seat.id, seat.name)}
                 >
                     {seat.name}
                 </SeatItem>

@@ -1,12 +1,11 @@
-import {useParams, Navigate, Link} from "react-router-dom";
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useParams, Navigate } from "react-router-dom";
 import styled from 'styled-components';
-import { GoContainer } from "react-icons/go";
 
-export default function SuccessPage({data}){
+
+export default function SuccessPage({data, movie}){
     
     console.log("data: ",data);
+    console.log("movie: ",movie);
 
     return(
         <PageContainer>

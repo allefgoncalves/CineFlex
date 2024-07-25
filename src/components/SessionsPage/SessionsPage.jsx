@@ -1,23 +1,27 @@
-import {useParams, Navigate, Link} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-export default function SessionsPage(){
+export default function SessionsPage({setMovie}){
     const idobj = useParams();
     const idfilme = idobj.idFilme;
     const [sessions, setSessions] = useState([]);
-    const [filme, setFilme] = useState([]);
+    const [movieInfo, setMovieInfo] = useState({});
+    
 
     useEffect(()=>{  
-        const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idfilme}/showtimes`);
-        promise.then(resposta => {
+        axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idfilme}/showtimes`)
+        
+        .then(resposta => {
             setSessions(resposta.data.days);
-            setFilme(resposta.data);
-            console.log(resposta.data);
-        });
+            setMovieInfo({
+                title: resposta.data.title,
+                overview: resposta.data.overview,
+            });
+        })
     
-        promise.catch(() => {
+        .catch(() => {
           console.log('deu errado, sessions');
        });
 
@@ -30,13 +34,20 @@ export default function SessionsPage(){
                 {sessions.map(session=>(
                     <SessionContainer key={session.id}>
                          {session.weekday} - {session.date} 
-                        <line></line>
+                        <Line></Line>
                         <ButtonsContainer>
                             {session.showtimes.map(showtime =>
                                 <Link 
                                     key={showtime.id}
                                     to={`/assentos/${showtime.id}`}
-                                    onClick={()=>Navigate("/sessoes/:idFilme")}
+                                    onClick={()=>{
+                                        const movie = {
+                                            ...movieInfo,
+                                            weekday: session.weekday,
+                                            date: session.date,
+                                        };
+                                        setMovie(movie);
+                                    }}
                                 >
                                     <button>{showtime.name}</button>
                                 </Link>
@@ -67,14 +78,14 @@ const SessionContainer = styled.li`
     div a button{
         background-color: #2B2D36;
     }
-
-    line{
-        margin-top: 18px;
-        width: 302px;
-        height: 2px;
-        background-color: #4E5A65;
-    }
 `
+const Line = styled.div`
+    margin-top: 18px;
+    width: 302px;
+    height: 2px;
+    background-color: #4E5A65;
+`
+
 const ButtonsContainer = styled.div`
     width: 302px;
     display: flex;

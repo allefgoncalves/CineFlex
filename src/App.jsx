@@ -11,6 +11,7 @@ import { useState } from 'react';
 export default function App() {
 
   const [data, setData] = useState([]);
+  const [movie, setMovie] = useState([]);
 
   return (
     <BrowserRouter>
@@ -18,9 +19,9 @@ export default function App() {
       <NavContainer><img src={ClapperBoard}/>CINEFLEX</NavContainer>
       <Routes>
         <Route path="/" element={<Homepage />}></Route>
-        <Route path={`/sessoes/:idFilme`} element={<SessionsPage />}></Route>
+        <Route path={`/sessoes/:idFilme`} element={<SessionsPage setMovie={setMovie}/>}></Route>
         <Route path={`/assentos/:idSessao`} element={<SeatsPage setData={setData}/>}></Route>
-        <Route path={`/sucesso`} element={<SuccessPage data={data}/>}></Route>
+        <Route path={`/sucesso`} element={<SuccessPage data={data} movie={movie}/>}></Route>
       </Routes>    
     </BrowserRouter>
   )

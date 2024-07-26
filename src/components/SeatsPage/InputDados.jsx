@@ -73,7 +73,7 @@ const FormContainer = styled.div`
     }
 
     input {
-        width: calc(100vw - 60px);
+        width: 338px;;
         margin: 0px auto;
         padding: 10px;
         border: 1px solid #D4D4D4;

@@ -43,7 +43,7 @@ export default function SessionsPage({setMovie}){
                                     onClick={()=>{
                                         const movie = {
                                             ...movieInfo,
-                                            weekday: session.weekday,
+                                            hour: showtime.name,
                                             date: session.date,
                                         };
                                         setMovie(movie);

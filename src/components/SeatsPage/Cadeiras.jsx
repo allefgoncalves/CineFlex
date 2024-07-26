@@ -16,6 +16,7 @@ export default function Cadeiras({ seatslocal, selecionados, selecionar }){
             ):(
                 <SeatItem
                 key={seat.id}
+                onClick={()=>alert("Esse assento não está disponível")}
             >
                 {seat.name}
             </SeatItem>
